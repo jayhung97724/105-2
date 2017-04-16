@@ -115,7 +115,7 @@ def showPlot(clusters):
     plt.ylabel('Petal length')
     plt.legend(loc = 'upper left')
     plt.draw()
-    plt.pause(3)
+    plt.pause(0.1)
     plt.clf()
 
 def countSSE(centers, sse):
@@ -126,9 +126,9 @@ def countSSE(centers, sse):
     sse += [dist2cxSum]
     return sse
 def showSSE(sse):
-    plt.xlabel('Iteratios')
-    plt.ylabel('SSE')
-    plt.title('SSE of the clusters')
+    plt.xlabel('Iterations')
+    plt.ylabel('WCSS')
+    plt.title('Within-cluster Sum of Squares (Variance)')
     plt.plot(sse)
     plt.axis([0, len(sse), 50, 150])
     plt.show()
