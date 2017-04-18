@@ -18,14 +18,18 @@ def dist(f1, f2):
     a = np.array
     d = a(f1)-a(f2)
     return np.sqrt(np.dot(d, d))
+    # dist 為計算多維空間中兩資料點的實際距離
+    # 將 tuple 轉為 np.array 並使用 np 的 sqrt, dot 函式
 
 def dist2(f1, f2):
     a = np.array
     d = a(f1)-a(f2)
     return np.dot(d, d)
+    # dist2 為計算 variance (差平方)
 
-def mean(feats):
-    return tuple(np.mean(feats, axis=0))
+def mean(clusters):
+    return tuple(np.mean(clusters, axis=0))
+    # mean 為計算某一群集的平均
 
 def assign(centers):
     new_centers = defaultdict(list)
@@ -34,6 +38,7 @@ def assign(centers):
             best = min(centers, key=lambda c: dist(x,c))
             new_centers[best] += [x]
     return new_centers
+    # 呼叫 dist 函式來作為比較形心得依據
 
 def update(centers):
     new_centers = {}
@@ -42,6 +47,7 @@ def update(centers):
         print(mean(centers[c]))
         new_centers[mean(centers[c])] = centers[c]
     return new_centers
+    # 更新形心(計算平均值)
 
 def kmeans(features, k, maxiter=100):
     sse = []
@@ -67,6 +73,7 @@ def counter(alist):
     for x in alist:
         count[x] += 1
     return dict(count)
+    # 單純是個 cluster 的計數器，計算經分群的結果
 
 def demo(seed=999):
     try:
@@ -83,6 +90,10 @@ def demo(seed=999):
     for c in clusters:
         print(counter([data[x] for x in clusters[c]]))
     # showPlot(clusters)
+
+
+# ======================  以下是 pyplot 繪圖  ========================
+# ======================      code 髒髒的     ========================
 
 def countTrueMean(features):
     global o
